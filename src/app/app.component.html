@@ -1,0 +1,67 @@
+<div>
+  <h2>Liste des Produits</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Confirmation Dialog -->
+</div>
+
+<div class="create-product-container">
+  <h2>Create Product</h2>
+  <form (ngSubmit)="createProduct()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="product.name" name="name" required />
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input
+        id="description"
+        [(ngModel)]="product.description"
+        name="description"
+        required
+      />
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input
+        id="price"
+        [(ngModel)]="product.price"
+        name="price"
+        type="number"
+        required
+      />
+    </div>
+    <div>
+      <label for="stock">Stock:</label>
+      <input
+        id="stock"
+        [(ngModel)]="product.stock"
+        name="stock"
+        type="number"
+        required
+      />
+    </div>
+    <button type="submit">Create Product</button>
+  </form>
+</div>
