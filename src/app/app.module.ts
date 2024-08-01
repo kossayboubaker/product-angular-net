@@ -10,7 +10,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
+
 import { FormsModule } from '@angular/forms';
 import {
   HttpClientModule,
@@ -18,6 +18,9 @@ import {
   withFetch,
 } from '@angular/common/http'; // Import required modules
 import { ProductService } from './product.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FooterComponent } from './footer/footer.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { ProductService } from './product.service';
     ProductCreateComponent,
     ProductUpdateComponent,
     NavBarComponent,
-    SideBarComponent,
+
+    SidebarComponent,
+    FooterComponent,
+    SignInComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

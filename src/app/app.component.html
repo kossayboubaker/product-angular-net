@@ -1,67 +1,69 @@
-<div>
-  <h2>Liste des Produits</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Prix</th>
-        <th>Stock</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.price }}</td>
-        <td>{{ product.stock }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Confirmation Dialog -->
+<div class="spa">
+<app-sidebar></app-sidebar>
 </div>
 
-<div class="create-product-container">
-  <h2>Create Product</h2>
-  <form (ngSubmit)="createProduct()">
-    <div>
-      <label for="name">Name:</label>
-      <input id="name" [(ngModel)]="product.name" name="name" required />
-    </div>
-    <div>
-      <label for="description">Description:</label>
-      <input
-        id="description"
-        [(ngModel)]="product.description"
-        name="description"
-        required
-      />
-    </div>
-    <div>
-      <label for="price">Price:</label>
-      <input
-        id="price"
-        [(ngModel)]="product.price"
-        name="price"
-        type="number"
-        required
-      />
-    </div>
-    <div>
-      <label for="stock">Stock:</label>
-      <input
-        id="stock"
-        [(ngModel)]="product.stock"
-        name="stock"
-        type="number"
-        required
-      />
-    </div>
-    <button type="submit">Create Product</button>
-  </form>
+<link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+
+<div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
+
+  <h1 class="text-3xl font-bold">Dashboard
+  </h1>
+
+  <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-yellow-200">
+    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
+
+      <thead >
+        <tr class="text-left bg-gray-100 border-b">
+          <th >Nom</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="text-left">{{ product.name }}</td>
+          <td class="text-left">{{ product.description }}</td>
+          <td class="text-left">{{ product.price }}</td>
+          <td class="text-left">{{ product.stock }}</td>
+          <td>
+            <button class="text-red-500" (click)="deleteProduct(product.id)">Delete</button>
+
+
+            <button class="text-blue-500" (click)="updateProduct(product)">Update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+
+  <!-- Create Product Form -->
+  <div class="create-product-container mt-8">
+    <h2 class="text-2xl mb-4">Create Product</h2>
+    <form (ngSubmit)="createProduct()" class="space-y-4">
+      <div>
+        <label for="name" class="block text-gray-700">Name:</label>
+        <input id="name" [(ngModel)]="product.name" name="name" required class="mt-1 block w-full" />
+      </div>
+      <div>
+        <label for="description" class="block text-gray-700">Description:</label>
+        <input id="description" [(ngModel)]="product.description" name="description" required class="mt-1 block w-full" />
+      </div>
+      <div>
+        <label for="price" class="block text-gray-700">Price:</label>
+        <input id="price" [(ngModel)]="product.price" name="price" type="number" required class="mt-1 block w-full" />
+      </div>
+      <div>
+        <label for="stock" class="block text-gray-700">Stock:</label>
+        <input id="stock" [(ngModel)]="product.stock" name="stock" type="number" required class="mt-1 block w-full" />
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Product</button>
+    </form>
+  </div>
 </div>
+<app-footer></app-footer>

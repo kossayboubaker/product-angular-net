@@ -24,6 +24,7 @@ export class AppComponent {
   ngOnInit(): void {
     this.loadProducts();
   }
+  
 
   createProduct(): void {
     this.productService.createProduct(this.product).subscribe(
@@ -57,6 +58,41 @@ export class AppComponent {
       },
       error: (error) => {
         console.error('Error deleting product', error);
+      },
+    });
+  }
+  // methode pour modifier un produit
+  editProduct(productId: number): void {
+    this.productService.getProductById(productId).subscribe({
+      next: (product) => {
+        this.product = product;
+      },
+      error: (error) => {
+        console.error('Error loading product', error);
+      },
+    });
+  }
+
+  updateProduct(product: Product): void {
+    this.productService.updateProduct(product).subscribe({
+      next: () => {
+        console.log('Product updated successfully');
+        this.loadProducts();
+      },
+      error: (error) => {
+        console.error('Error updating product', error);
+      },
+    });
+  }
+
+  // methode pour affiche un produit par son id
+  getProductById(id: number): void {
+    this.productService.getProductById(id).subscribe({
+      next: (product) => {
+        console.log('Product found:', product);
+      },
+      error: (error) => {
+        console.error('Error finding product', error);
       },
     });
   }
