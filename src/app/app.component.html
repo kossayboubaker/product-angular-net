@@ -1,69 +1,86 @@
 <div class="spa">
-<app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
 </div>
 
 <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 
-<div class="container w-full md:w-4/5 xl:w-3/5 mx-auto px-2">
-
-  <h1 class="text-3xl font-bold">Dashboard
-  </h1>
-
-  <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-yellow-200">
-    <table id="example" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
-
-      <thead >
-        <tr class="text-left bg-gray-100 border-b">
-          <th >Nom</th>
-          <th>Description</th>
-          <th>Prix</th>
-          <th>Stock</th>
-          <th>Actions</th>
+<div class="container mx-auto px-6 py-9"><br>
+  <!-- Main Content -->
+  <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 border border-gray-300 rounded-lg shadow-md mt-6">
+    <h2 class="text-2xl font-bold mb-4 text-center text-black">Liste des Produits</h2>
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+      <thead>
+        <tr class="text-left bg-gray-200 border-b">
+          <th class="py-2 px-4 text-center ">Nom</th>
+          <th class="py-2 px-4 text-center">Description</th>
+          <th class="py-2 px-4 text-center">Prix</th>
+          <th class="py-2 px-4 text-center">Stock</th>
+          <th class="py-2 px-4 text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
-          <td class="text-left">{{ product.name }}</td>
-          <td class="text-left">{{ product.description }}</td>
-          <td class="text-left">{{ product.price }}</td>
-          <td class="text-left">{{ product.stock }}</td>
-          <td>
-            <button class="text-red-500" (click)="deleteProduct(product.id)">Delete</button>
-
-
-            <button class="text-blue-500" (click)="updateProduct(product)">Update</button>
+        <tr *ngFor="let product of products" class="border-b bg-green-200">
+          <td class="py-2 px-4 text-center">{{ product.name }}</td>
+          <td class="py-2 px-4 text-center ">{{ product.description }}</td>
+          <td class="py-2 px-4 text-center">{{ product.price }}</td>
+          <td class="py-2 px-4 text-center ">{{ product.stock }}</td>
+          <td class="py-2 px-4 text-center">
+            <button class="text-black bg-yellow-400 font-bold  hover:text-blue-700 mr-2 py-1 px-3 rounded border border-blue-500 hover:bg-blue-100" (click)="selectProduct(product)">Update Product</button>
+            <button class="text-black bg-red-500 hover:text-red-700 font-bold py-1 px-3 rounded border border-red-500 hover:bg-red-100" (click)="deleteProduct(product.id)">Delete Product</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 
   <!-- Create Product Form -->
-  <div class="create-product-container mt-8">
-    <h2 class="text-2xl mb-4">Create Product</h2>
-    <form (ngSubmit)="createProduct()" class="space-y-4">
-      <div>
-        <label for="name" class="block text-gray-700">Name:</label>
-        <input id="name" [(ngModel)]="product.name" name="name" required class="mt-1 block w-full" />
+  <div class="max-w-5xl bg-gradient-to-r from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6 mb-6 ">
+    <h2 class="text-2xl font-bold mb-4 text-center">Create Product</h2>
+    <form (ngSubmit)="createProduct()" class="space-y-6">
+      <div class="form-group">
+        <label for="name" class="block text-gray-700  font-bold space-y-7">Name:</label>
+        <input id="name" [(ngModel)]="newProduct.name" name="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm  font-bold" />
       </div>
-      <div>
-        <label for="description" class="block text-gray-700">Description:</label>
-        <input id="description" [(ngModel)]="product.description" name="description" required class="mt-1 block w-full" />
+      <div class="form-group">
+        <label for="description" class="block text-gray-700  font-bold">Description:</label>
+        <textarea id="description" [(ngModel)]="newProduct.description" name="description" required class="mt-1 block w-full font-bold border-gray-300 rounded-md shadow-sm"></textarea>
       </div>
-      <div>
-        <label for="price" class="block text-gray-700">Price:</label>
-        <input id="price" [(ngModel)]="product.price" name="price" type="number" required class="mt-1 block w-full" />
+      <div class="form-group">
+        <label for="price" class="block text-gray-700  font-bold">Price:</label>
+        <input id="price" [(ngModel)]="newProduct.price" name="price" type="number" required class="mt-1 block w-full  font-bold border-gray-300 rounded-md shadow-sm" />
       </div>
-      <div>
-        <label for="stock" class="block text-gray-700">Stock:</label>
-        <input id="stock" [(ngModel)]="product.stock" name="stock" type="number" required class="mt-1 block w-full" />
+      <div class="form-group">
+        <label for="stock" class="block text-gray-700  font-bold">Stock:</label>
+        <input id="stock" [(ngModel)]="newProduct.stock" name="stock" type="number" required class="mt-1 block w-full font-bold border-gray-300 rounded-md shadow-sm" />
       </div>
-      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Product</button>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300 text-center">Create Product</button>
+    </form>
+  </div>
+
+  <!-- Update Product Form -->
+  <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6" *ngIf="selectedProduct">
+    <h2 class="text-2xl font-bold mb-4 text-center">Mettre à Jour le Produit</h2>
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group mb-4">
+        <label for="name" class="block text-gray-700 font-bold">Nom du Produit:</label>
+        <input type="text" id="name" [(ngModel)]="selectedProduct.name" name="name" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <div class="form-group mb-4">
+        <label for="description" class="block text-gray-700 font-bold">Description:</label>
+        <textarea id="description" [(ngModel)]="selectedProduct.description" name="description" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required></textarea>
+      </div>
+      <div class="form-group mb-4">
+        <label for="price" class="block text-gray-700  font-bold">Prix:</label>
+        <input type="number" id="price" [(ngModel)]="selectedProduct.price" name="price" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <div class="form-group mb-4">
+        <label for="stock" class="block text-gray-700 font-bold">Quantité en Stock:</label>
+        <input type="number" id="stock" [(ngModel)]="selectedProduct.stock" name="stock" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-300">Mettre à Jour</button>
     </form>
   </div>
 </div>
+
 <app-footer></app-footer>

@@ -7,6 +7,7 @@ import { Product } from './product.model';
   providedIn: 'root',
 })
 export class ProductService {
+  [x: string]: any;
   private apiUrl = 'https://localhost:7288/api/Product';
 
   constructor(private http: HttpClient) {}

@@ -21,6 +21,7 @@ import { ProductService } from './product.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
     SidebarComponent,
     FooterComponent,
     SignInComponent,
+    ProductDetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
