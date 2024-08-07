@@ -1,47 +1,41 @@
 import { NgModule } from '@angular/core';
-import {
-  BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductListComponent } from './products-list/products-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-
-import { FormsModule } from '@angular/forms';
-import {
-  HttpClientModule,
-  provideHttpClient,
-  withFetch,
-} from '@angular/common/http'; // Import required modules
-import { ProductService } from './product.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FooterComponent } from './footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsListComponent,
+    ProductListComponent,
     ProductCreateComponent,
     ProductUpdateComponent,
-    NavBarComponent,
-
-    SidebarComponent,
-    FooterComponent,
     SignInComponent,
     ProductDetailComponent,
+    SidebarComponent,
+    FooterComponent,
+    DashboardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient(withFetch()),
-    ProductService,
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule, // Importez le module de routage
+    RouterModule.forRoot([]) // Configurez le routeur (peut être facultatif si déjà importé dans AppRoutingModule)
   ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

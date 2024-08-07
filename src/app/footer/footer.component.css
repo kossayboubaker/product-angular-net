@@ -1,0 +1,11 @@
+/* Assurez-vous que le body utilise un modèle de boîte flexible pour remplir toute la hauteur de l'écran */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+footer {
+  margin-top: auto; /* Force le footer à se pousser vers le bas */
+}

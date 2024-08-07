@@ -1,1 +1,24 @@
-<p>product-update works!</p>
+ <!-- Update Product Form -->
+ <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6" *ngIf="selectedProduct">
+  <h2 class="text-2xl font-bold mb-4 text-center">Mettre à Jour le Produit</h2>
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group mb-4">
+      <label for="name" class="block text-gray-700 font-bold">Nom du Produit:</label>
+      <input type="text" id="name" [(ngModel)]="selectedProduct.name" name="name" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+    </div>
+    <div class="form-group mb-4">
+      <label for="description" class="block text-gray-700 font-bold">Description:</label>
+      <textarea id="description" [(ngModel)]="selectedProduct.description" name="description" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required></textarea>
+    </div>
+    <div class="form-group mb-4">
+      <label for="price" class="block text-gray-700  font-bold">Prix:</label>
+      <input type="number" id="price" [(ngModel)]="selectedProduct.price" name="price" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+    </div>
+    <div class="form-group mb-4">
+      <label for="stock" class="block text-gray-700 font-bold">Quantité en Stock:</label>
+      <input type="number" id="stock" [(ngModel)]="selectedProduct.stock" name="stock" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+    </div>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-300">Mettre à Jour</button>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+<!-- Create Product Form -->
+<div class="container mx-auto px-9 py-9">
+<div class="max-w-5xl bg-gradient-to-r from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6 mb-6 ">
+  <h2 class="text-2xl font-bold mb-4 text-center">Create Product</h2>
+  <form (ngSubmit)="createProduct()" class="space-y-6">
+    <div class="form-group">
+      <label for="name" class="block text-gray-700  font-bold space-y-7">Name:</label>
+      <input id="name" [(ngModel)]="newProduct.name" name="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm  font-bold" />
+    </div>
+    <div class="form-group">
+      <label for="description" class="block text-gray-700  font-bold">Description:</label>
+      <textarea id="description" [(ngModel)]="newProduct.description" name="description" required class="mt-1 block w-full font-bold border-gray-300 rounded-md shadow-sm"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price" class="block text-gray-700  font-bold">Price:</label>
+      <input id="price" [(ngModel)]="newProduct.price" name="price" type="number" required class="mt-1 block w-full  font-bold border-gray-300 rounded-md shadow-sm" />
+    </div>
+    <div class="form-group">
+      <label for="stock" class="block text-gray-700  font-bold">Stock:</label>
+      <input id="stock" [(ngModel)]="newProduct.stock" name="stock" type="number" required class="mt-1 block w-full font-bold border-gray-300 rounded-md shadow-sm" />
+    </div>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300 text-center">Create Product</button>
+  </form>
+</div>

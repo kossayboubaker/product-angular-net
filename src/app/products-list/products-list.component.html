@@ -1,12 +1,57 @@
-<table>
-  <tr>
-    <td>ID</td>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Price</td>
-    <td>Stock</td>
-  </tr>
-  <tr>
-    <td></td>
-  </tr>
-</table>
+<div class="container mx-auto px-9 py-9 "><br>
+  <!-- Main Content -->
+  <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 border border-gray-300 rounded-lg shadow-md mt-6">
+    <h2 class="text-2xl font-bold mb-4 text-center text-black">Liste des Produits</h2>
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+      <thead>
+        <tr class="text-left bg-gray-200 border-b">
+          <th class="py-2 px-4 text-center ">Nom</th>
+          <th class="py-2 px-4 text-center">Description</th>
+          <th class="py-2 px-4 text-center">Prix</th>
+          <th class="py-2 px-4 text-center">Stock</th>
+          <th class="py-2 px-4 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products" class="border-b bg-green-200">
+          <td class="py-2 px-4 text-center">{{ product.name }}</td>
+          <td class="py-2 px-4 text-center ">{{ product.description }}</td>
+          <td class="py-2 px-4 text-center">{{ product.price }}</td>
+          <td class="py-2 px-4 text-center ">{{ product.stock }}</td>
+          <td class="py-2 px-4 text-center">
+            <button class="text-black bg-yellow-400 font-bold hover:text-blue-700 mr-2 py-1 px-3 rounded border border-blue-500 hover:bg-blue-100" (click)="selectProduct(product)">Update Product</button>
+
+
+            <button class="text-black bg-red-500 hover:text-red-700 font-bold py-1 px-3 rounded border border-red-500 hover:bg-red-100" (click)="deleteProduct(product.id)">Delete Product</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Update Product Form -->
+  <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6" *ngIf="selectedProduct">
+    <h2 class="text-2xl font-bold mb-4 text-center">Mettre à Jour le Produit</h2>
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group mb-4">
+        <label for="name" class="block text-gray-700 font-bold">Nom du Produit:</label>
+        <input type="text" id="name" [(ngModel)]="selectedProduct.name" name="name" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <div class="form-group mb-4">
+        <label for="description" class="block text-gray-700 font-bold">Description:</label>
+        <textarea id="description" [(ngModel)]="selectedProduct.description" name="description" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required></textarea>
+      </div>
+      <div class="form-group mb-4">
+        <label for="price" class="block text-gray-700  font-bold">Prix:</label>
+        <input type="number" id="price" [(ngModel)]="selectedProduct.price" name="price" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <div class="form-group mb-4">
+        <label for="stock" class="block text-gray-700 font-bold">Quantité en Stock:</label>
+        <input type="number" id="stock" [(ngModel)]="selectedProduct.stock" name="stock" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-300">Mettre à Jour</button>
+    </form>
+  </div>
+</div>

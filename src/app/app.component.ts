@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ProductService } from './product.service';
 import { Product } from './product.model';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListComponent } from './products-list/products-list.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -74,6 +80,7 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe({
