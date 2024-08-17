@@ -1,11 +1,18 @@
-<div class="container mx-auto px-9 py-9 "><br>
+<div class="container mx-auto px-9 py-9">
   <!-- Main Content -->
-  <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 border border-gray-300 rounded-lg shadow-md mt-6">
+
+  <!-- bouton pour ajouter un produit-->
+
+
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" routerLink="/product-create">Ajouter un produit</button>
+
+
+  <div class="max-w-auto bg-gradient-to-t from-green-200 via-blue-300 to-red-300 border border-gray-300 rounded-lg shadow-md mt-6">
     <h2 class="text-2xl font-bold mb-4 text-center text-black">Liste des Produits</h2>
     <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
       <thead>
         <tr class="text-left bg-gray-200 border-b">
-          <th class="py-2 px-4 text-center ">Nom</th>
+          <th class="py-2 px-4 text-center">Nom</th>
           <th class="py-2 px-4 text-center">Description</th>
           <th class="py-2 px-4 text-center">Prix</th>
           <th class="py-2 px-4 text-center">Stock</th>
@@ -15,26 +22,47 @@
       <tbody>
         <tr *ngFor="let product of products" class="border-b bg-green-200">
           <td class="py-2 px-4 text-center">{{ product.name }}</td>
-          <td class="py-2 px-4 text-center ">{{ product.description }}</td>
+          <td class="py-2 px-4 text-center">{{ product.description }}</td>
           <td class="py-2 px-4 text-center">{{ product.price }}</td>
-          <td class="py-2 px-4 text-center ">{{ product.stock }}</td>
+          <td class="py-2 px-4 text-center">{{ product.stock }}</td>
           <td class="py-2 px-4 text-center">
-            <button class="text-black bg-yellow-400 font-bold hover:text-blue-700 mr-2 py-1 px-3 rounded border border-blue-500 hover:bg-blue-100" (click)="selectProduct(product)">Update Product</button>
+            <button
+              class="text-black bg-yellow-400 font-bold hover:text-blue-700 mr-2 py-1 px-3 rounded border border-blue-500 hover:bg-blue-100"
+              (click)="selectProduct(product)">
+              Update Product
+            </button>
 
+            <button
+              class="text-black bg-red-500 hover:text-red-700 font-bold py-1 px-3 rounded border border-red-500 hover:bg-red-100"
+              (click)="deleteProduct(product.id)">
+              Delete Product
+            </button>
 
-            <button class="text-black bg-red-500 hover:text-red-700 font-bold py-1 px-3 rounded border border-red-500 hover:bg-red-100" (click)="deleteProduct(product.id)">Delete Product</button>
+            <button
+              class="text-black bg-blue-500 hover:text-blue-700 font-bold py-1 px-3 rounded border border-blue-500 hover:bg-blue-800"
+              (click)="selectProductById(product.id)">
+              View Product
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-
+  <!-- Section pour afficher les détails du produit sélectionné -->
+<!-- Section pour afficher les détails du produit sélectionné -->
+<div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6" *ngIf="selectedProductById && !isUpdateMode">
+  <h2 class="text-2xl font-bold mb-4 text-center">Détails du Produit</h2>
+  <p><strong>ID:</strong> {{ selectedProductById.id }}</p>
+  <p><strong>Name:</strong> {{ selectedProductById.name }}</p>
+  <p><strong>Description:</strong> {{ selectedProductById.description }}</p>
+  <p><strong>Price:</strong> {{ selectedProductById.price | currency }}</p>
+  <p><strong>Stock:</strong> {{ selectedProductById.stock }}</p>
+</div>
   <!-- Update Product Form -->
   <div class="max-w-5xl bg-gradient-to-t from-green-200 via-blue-300 to-red-300 p-6 rounded-lg shadow-md mt-6" *ngIf="selectedProduct">
     <h2 class="text-2xl font-bold mb-4 text-center">Mettre à Jour le Produit</h2>
     <form (ngSubmit)="onSubmit()">
-
       <div class="form-group mb-4">
         <label for="name" class="block text-gray-700 font-bold">Nom du Produit:</label>
         <input type="text" id="name" [(ngModel)]="selectedProduct.name" name="name" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
@@ -44,7 +72,7 @@
         <textarea id="description" [(ngModel)]="selectedProduct.description" name="description" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required></textarea>
       </div>
       <div class="form-group mb-4">
-        <label for="price" class="block text-gray-700  font-bold">Prix:</label>
+        <label for="price" class="block text-gray-700 font-bold">Prix:</label>
         <input type="number" id="price" [(ngModel)]="selectedProduct.price" name="price" class="block w-full border-gray-300 rounded-md shadow-sm font-bold" required />
       </div>
       <div class="form-group mb-4">

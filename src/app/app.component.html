@@ -1,12 +1,15 @@
-<div class="spa">
-  <app-sidebar></app-sidebar>
 
 
+<div class="app-container">
+  <div *ngIf="isLoggedIn; else loggedOutTemplate">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <ng-template #loggedOutTemplate> </ng-template>
+  <router-outlet></router-outlet>
+  <div class="main">
 
 
-
-
+    <app-footer></app-footer>
+  </div>
 </div>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
-

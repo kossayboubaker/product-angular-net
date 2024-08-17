@@ -19,6 +19,10 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product | undefined;
 
+  selectedProductById: Product | null = null; // Variable pour afficher les détails du produit
+  isUpdateMode: boolean = false;
+
+
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
@@ -31,13 +35,7 @@ export class ProductListComponent implements OnInit {
         console.log('Product created successfully');
         this.loadProducts();
         this.router.navigate(['']);
-        this.newProduct = {
-          id: 0,
-          name: '',
-          description: '',
-          price: 0,
-          stock: 0,
-        };
+        this.resetNewProduct();
       },
       (error: any) => {
         console.error('Error creating product', error);
@@ -47,8 +45,8 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProduct().subscribe({
-      next: (products: any) => {
-        this.products = products.resultat.items;
+      next: (response: any) => {
+        this.products = response.resultat.items;
       },
       error: (error) => {
         console.error('Error while loading products', error);
@@ -58,6 +56,21 @@ export class ProductListComponent implements OnInit {
 
   selectProduct(product: Product): void {
     this.selectedProduct = { ...product };
+     //this.isUpdateMode = true; // Set to update mode
+    // this.selectedProductById = null; // Clear the view mode product
+  }
+
+  selectProductById(id: number): void {
+    this.productService.getProductById(id).subscribe({
+      next: (product) => {
+        this.selectedProductById = { ...product };
+         // Set to view mode
+         // Clear the update mode product
+      },
+      error: (error) => {
+        console.error('Error finding product', error);
+      },
+    });
   }
 
   onSubmit(): void {
@@ -67,6 +80,7 @@ export class ProductListComponent implements OnInit {
           console.log('Product updated successfully');
           this.loadProducts();
           this.selectedProduct = undefined;
+          //this.isUpdateMode = false;
         },
         error: (error) => {
           console.error('Error updating product:', error);
@@ -74,7 +88,6 @@ export class ProductListComponent implements OnInit {
       });
     }
   }
-
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe({
@@ -86,5 +99,15 @@ export class ProductListComponent implements OnInit {
         console.error('Error deleting product:', error);
       },
     });
+  }
+
+  private resetNewProduct(): void {
+    this.newProduct = {
+      id: 0,
+      name: '',
+      description: '',
+      price: 0,
+      stock: 0,
+    };
   }
 }

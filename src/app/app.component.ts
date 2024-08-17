@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductService } from './product.service';
 import { Product } from './product.model';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductListComponent } from './products-list/products-list.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  'title': string;
   newProduct: Product = {
     id: 0,
     name: '',
@@ -80,7 +76,6 @@ export class AppComponent implements OnInit {
       });
     }
   }
-
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe({
